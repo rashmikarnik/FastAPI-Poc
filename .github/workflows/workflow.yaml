@@ -24,6 +24,21 @@ jobs:
       - name: Configure Docker for gcloud auth
         run: gcloud auth configure-docker us-central1-docker.pkg.dev
 
+      - name: Check Docker config.json location
+        run: |
+          if [ -f "$HOME/.docker/config.json" ]; then
+            echo "Docker config.json found in standard location: $HOME/.docker/config.json"
+            cat $HOME/.docker/config.json
+          else
+            echo "Docker config.json NOT found in standard location: $HOME/.docker/config.json"
+          fi
+          if [ -f "$HOME/snap/docker/current/.docker/config.json" ]; then
+            echo "Docker config.json found in snap location: $HOME/snap/docker/current/.docker/config.json"
+            cat $HOME/snap/docker/current/.docker/config.json
+          else
+            echo "Docker config.json NOT found in snap location: $HOME/snap/docker/current/.docker/config.json"
+          fi
+
       - name: Build Docker image
         run: |
           docker build -t us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc-api/poc-api:latest .
@@ -35,4 +50,4 @@ jobs:
       #   run: gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
 
       - name: push images
-        run: docker push  us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc-api/poc-api:latest
+        run: docker push us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc-api/poc-api:latest
