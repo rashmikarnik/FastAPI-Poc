@@ -26,9 +26,10 @@ jobs:
           export_default_credentials: true
 
       - name: build and push the docker image
-        env:
-          GOOGLE_PROJECT: ${{ secrets.GOOGLE_CREDENTIALS }}
+        # env:
+        #   GOOGLE_PROJECT: ${{ secrets.GOOGLE_CREDENTIALS }}
         run: |
+          gcloud auth activate-service-account 850818640270-compute@developer.gserviceaccount.com --key-file=${{ secrets.GOOGLE_CREDENTIALS }}
           gcloud auth configure-docker us-central1-docker.pkg.dev
           docker build -t us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc-api/poc-api:latest .
           docker push  us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc-api/poc-api:latest
