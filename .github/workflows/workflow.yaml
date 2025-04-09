@@ -19,7 +19,7 @@ jobs:
       #     echo "${{ secrets.GOOGLE_CREDENTIALS }}" > google-credentials.json
 
       - name: install the gcloud cli
-        uses: google-github-actions/setup-gcloud@v0
+        uses: google-github-actions/setup-gcloud@v1
         with:
           service_account_key: ${{ secrets.GOOGLE_CREDENTIALS }}
           install_components: "gke-gcloud-auth-plugin"
@@ -31,7 +31,7 @@ jobs:
         run: |
           gcloud auth configure-docker us-central1-docker.pkg.dev
           docker build -t us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc-api/poc-api:latest .
-          docker push  us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc
+          docker push  us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc-api/poc-api:latest
 
       # - name: Build Docker image
       #   run: |
