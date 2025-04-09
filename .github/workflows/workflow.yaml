@@ -18,6 +18,10 @@ jobs:
         run: |
           echo "${{ secrets.GOOGLE_CREDENTIALS }}" > google-credentials.json
 
+      - name: Activate service account
+        run: |
+          gcloud auth activate-service-account --key-file=google-credentials.json
+
       # - name: install the gcloud cli
       #   uses: google-github-actions/setup-gcloud@v1
       #   with:
