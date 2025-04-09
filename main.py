@@ -36,11 +36,11 @@ async def root():
     
 @app.get("/bigquerydata")
 # connect to big query
-async def bigquery_data():
+def bigquery_data():
     query = "SELECT * FROM `inlaid-goods-451523-i3.githubAction_example.test-masking`"
     query_job = big_query_client.query(query)
-    results = query_job.result()
-    return results
+    results = list(query_job.result())
+    return [dict(row) for row in results]
     
 
 @app.get("/test")

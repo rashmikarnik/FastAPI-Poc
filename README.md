@@ -42,6 +42,11 @@ c:\\Users\\raskarnik\\AppData\\Local\\Programs\\Python\\Python313\\python.exe -m
 3. run by clicking run and debug
 
 
-# seeting up code
+# setting up code
 1. Run : pip install python-dotenv -- to create env file
 2. google auth set up : pip install google-auth google-auth-oauthlib
+3. big query : pip install google-cloud-bigquery
+4. run service: python -m fastapi dev main.py or through debugger
+
+# create docker image
+1. Build the Image: docker build -t your-image-name .. 

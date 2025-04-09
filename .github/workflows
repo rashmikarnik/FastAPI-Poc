@@ -1,0 +1,23 @@
+name: Build and Run Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository to the GitHub Actions runner - comment
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: |
+          docker build -t poc-api-docker .
+
+      - name: list docker images
+        run: docker images
+

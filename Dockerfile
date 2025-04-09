@@ -1,0 +1,20 @@
+# Use the official Python base image
+FROM python:3.1-slim
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the requirements file
+COPY requirements.txt .
+
+# Install the dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the application code
+COPY . .
+
+# Expose the port
+# EXPOSE 8000
+
+# Run the command to start the development server
+CMD ["fastapi", "main:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]
