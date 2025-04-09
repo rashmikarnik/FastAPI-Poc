@@ -14,6 +14,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Create credentials file
+        run: |
+          echo "${{ secrets.GOOGLE_CREDENTIALS }}" > google-credentials.json
+
       - name: Build Docker image
         run: |
           docker build -t poc-api-docker .
@@ -22,7 +26,7 @@ jobs:
         run: docker images
 
       - name: docker login
-        run: cat ${{ secrets.GOOGLE_CREDENTIALS }} | docker login -u _json_key_base64 --password-stdin \ https://us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc-api
+        run: cat google-credentials.json | docker login -u _json_key_base64 --password-stdin \ https://us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc-api
 
 
 
