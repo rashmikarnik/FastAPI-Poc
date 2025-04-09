@@ -21,3 +21,10 @@ jobs:
       - name: list docker images
         run: docker images
 
+      - name: docker login
+        run: cat ${{ secrets.GOOGLE_CREDENTIALS }} | docker login -u _json_key_base64 --password-stdin \ https://us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc-api
+
+
+
+
+
