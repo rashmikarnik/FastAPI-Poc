@@ -14,6 +14,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
+
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v1
         with:
@@ -24,21 +29,6 @@ jobs:
       - name: Configure Docker for gcloud auth
         run: gcloud auth configure-docker us-central1-docker.pkg.dev
 
-      - name: Check Docker config.json location
-        run: |
-          if [ -f "$HOME/.docker/config.json" ]; then
-            echo "Docker config.json found in standard location: $HOME/.docker/config.json"
-            cat $HOME/.docker/config.json
-          else
-            echo "Docker config.json NOT found in standard location: $HOME/.docker/config.json"
-          fi
-          if [ -f "$HOME/snap/docker/current/.docker/config.json" ]; then
-            echo "Docker config.json found in snap location: $HOME/snap/docker/current/.docker/config.json"
-            cat $HOME/snap/docker/current/.docker/config.json
-          else
-            echo "Docker config.json NOT found in snap location: $HOME/snap/docker/current/.docker/config.json"
-          fi
-
       - name: Build Docker image
         run: |
           docker build -t us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc-api/poc-api:latest .
@@ -48,11 +38,6 @@ jobs:
 
       # - name: docker login
       #   run: gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
-      - name: Docker login
-        run: echo "${{ secrets.GOOGLE_CREDENTIALS }}" | gcloud auth activate-service-account --key-file=-
-
-      - name: Print access token
-        run: gcloud auth print-access-token
-
+      
       - name: push images
         run: docker push us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc-api/poc-api:latest
