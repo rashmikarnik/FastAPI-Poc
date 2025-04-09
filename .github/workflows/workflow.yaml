@@ -35,4 +35,4 @@ jobs:
       #   run: gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
 
       - name: push images
-        run: docker push  us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc-api/poc-api:latest
+        run: docker push us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc-api/poc-api:latest
