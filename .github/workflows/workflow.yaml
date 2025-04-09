@@ -30,6 +30,7 @@ jobs:
         #   GOOGLE_PROJECT: ${{ secrets.GOOGLE_CREDENTIALS }}
         run: |
           gcloud auth configure-docker us-central1-docker.pkg.dev
+          gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
           docker build -t us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc-api/poc-api:latest .
           docker push  us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc-api/poc-api:latest
       #docker build -t poc-api-docker .
