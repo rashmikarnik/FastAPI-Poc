@@ -42,3 +42,8 @@ jobs:
 
       # - name: docker login
       #   run: cat google-credentials.json | docker login -u _json_key_base64 --password-stdin \ https://us-central1-docker.pkg.dev/inlaid-goods-451523-i3/poc-api
+      
+
+
+
+
