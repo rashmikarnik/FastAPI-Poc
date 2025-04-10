@@ -19,20 +19,22 @@ else:
 
 app = FastAPI()
 
-credentials_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
-big_query_client = bigquery.Client.from_service_account_json(credentials_path)
+# Uncomment when running locally
+# credentials_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+# big_query_client = bigquery.Client.from_service_account_json(credentials_path)
+big_query_client = bigquery.Client()
 
 
-
-@app.get("/")
-async def root():
-    #get creds
+# Uncomment when running locally
+# @app.get("/")
+# async def root():
+#     #get creds
    
-    if(credentials_path):
-        credentials = service_account.Credentials.from_service_account_file(credentials_path)
-        return {"message": "Google creds loaded successfully"}
-    else:
-        return {"message": "Google creds not found"}
+#     if(credentials_path):
+#         credentials = service_account.Credentials.from_service_account_file(credentials_path)
+#         return {"message": "Google creds loaded successfully"}
+#     else:
+#         return {"message": "Google creds not found"}
     
 @app.get("/bigquerydata")
 # connect to big query
